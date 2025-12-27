@@ -1,0 +1,14 @@
+# dbt
+target/
+dbt_packages/
+logs/
+
+# credentials
+profiles.yml
+.env
+*.key
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
