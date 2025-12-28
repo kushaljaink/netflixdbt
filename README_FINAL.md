@@ -456,6 +456,23 @@ This launches an interactive documentation site showing:
 ```bash
 dbt run
 ```
+---
+
+## ✅ Analytics Queries (Executed in Snowflake)
+
+Each screenshot below shows the **SQL query** and the **output results** executed in Snowflake using the final dbt models in `MOVIELENS.RAW`.
+
+### 1) Which movies are most highly rated, and how does this vary by genre?
+![Q1 - Top Rated Movies](screenshots/q1_top_rated_movies.png)
+
+### 2) How do users interact with content over time (rating trends)?
+![Q2 - Rating Trends](screenshots/q2_rating_trends.png)
+
+### 3) What tags best describe a movie (genome relevance)?
+![Q3 - Top Tags For Movie](screenshots/q3_top_tags_for_movie.png)
+
+### 4) Which tags are associated with higher ratings?
+![Q4 - Tags vs Ratings](screenshots/q4_tags_vs_ratings.png)
 
 ---
 
