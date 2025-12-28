@@ -494,5 +494,6 @@ Each screenshot below shows the **SQL query** and the **output results** execute
 
 ## 👤 Author
 **Kushal Jain**  
-MS in Information Systems (Business Analytics)  
+MS in Information Systems  
 Analytics Engineering | Data Engineering | BI
+https://www.linkedin.com/in/kushaljaink/
