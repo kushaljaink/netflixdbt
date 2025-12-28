@@ -200,6 +200,75 @@ from tag_users
 
 ---
 
+## 🖥️ dbt Commands Used (VS Code Terminal)
+
+Below are the key dbt commands used during development, testing, and documentation of this project.
+
+### 🔹 Initialize dbt Project
+```bash
+dbt init netflixdbt
+```
+Creates the dbt project structure and configuration files.
+
+---
+
+### 🔹 Install dbt Dependencies
+```bash
+dbt deps
+```
+Installs dbt packages defined in `packages.yml`.
+
+---
+
+### 🔹 Run All Models
+```bash
+dbt run
+```
+Executes all dbt models (staging, dimensions, facts) in dependency order.
+
+---
+
+### 🔹 Run a Specific Model
+```bash
+dbt run --select dim_movies
+```
+Runs an individual model for targeted development and debugging.
+
+---
+
+### 🔹 Run Models with Upstream Dependencies
+```bash
+dbt run --select +fct_ratings
+```
+Runs a model along with all its upstream dependencies.
+
+---
+
+### 🔹 Test Data Quality
+```bash
+dbt test
+```
+Executes schema tests such as `not_null` and `unique` defined in `schema.yml`.
+
+---
+
+### 🔹 Generate dbt Documentation
+```bash
+dbt docs generate
+```
+Builds metadata and lineage information for all models.
+
+---
+
+### 🔹 Serve dbt Docs Locally
+```bash
+dbt docs serve
+```
+Launches an interactive documentation website locally to explore models and lineage.
+
+---
+
+
 ## 📸 Screenshots
 
 ### 🔹 Project Folder Structure
