@@ -107,22 +107,19 @@ netflixdbt/
 > All screenshots are stored inside the `/screenshots` folder.
 
 ### 🔹 Project Folder Structure
-![Project Structure](screenshots/01_project_structure.png)
+![Project Structure](screenshots/screenshots01_project_structure.png)
 
 ### 🔹 dbt Run – Successful Execution
-![dbt Run](screenshots/02_dbt_run_success.png)
+![dbt Run](screenshots/screenshots02_dbt_run_success.png)
 
 ### 🔹 Snowflake RAW Tables
-![Snowflake Raw](screenshots/03_snowflake_raw_tables.png)
+![Snowflake Raw](screenshots/screenshots03_snowflake_raw_tables.png)
 
 ### 🔹 Snowflake DEV Schema
-![Snowflake Dev](screenshots/04_snowflake_dev_schema.png)
+![Snowflake Dev](screenshots/screenshots04_snowflake_dev_schema.png)
 
 ### 🔹 dbt Docs – Lineage Graph
-![dbt Lineage](screenshots/05_dbt_docs_lineage.png)
-
-### 🔹 dbt Docs – Model Documentation
-![dbt Docs](screenshots/06_dbt_docs_model.png)
+![dbt Lineage](screenshots/screenshots05_dbt_docs_lineage.png)
 
 ---
 
