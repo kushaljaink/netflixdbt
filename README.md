@@ -135,7 +135,9 @@ Materialization is chosen to balance:
 - compute cost
 - maintainability
 - refresh speed  
+
 This materialization strategy mirrors how production analytics pipelines balance flexibility in early layers with performance and stability in downstream reporting layers.
+
 ---
 
 ### Data quality + documentation
