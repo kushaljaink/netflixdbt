@@ -137,7 +137,7 @@ Materialization is chosen to balance:
 - compute cost
 - maintainability
 - refresh speed
-
+“This materialization strategy mirrors how production analytics pipelines balance flexibility in early layers with performance and stability in downstream reporting layers.”
 ---
 
 ### Data quality + documentation (what ensures trust)
@@ -159,18 +159,6 @@ At the end of this project, the result is a Snowflake-based analytics layer that
 - supports scalable refresh patterns (including incremental loads)
 
 This project demonstrates how modern analytics teams transform raw data into a reusable, trusted warehouse layer that powers dashboards, insights, and ML features.
-
----
-
-
-## 🧠 Business Context
-Netflix-style platforms generate massive volumes of data such as:
-- User ratings and engagement events
-- Movie metadata and genres
-- User-generated tags and feedback
-- External movie references (IMDb, TMDB)
-
-Analytics teams rely on clean, reliable, and well-modeled datasets to power dashboards, experimentation, and downstream machine learning use cases.
 
 ---
 
