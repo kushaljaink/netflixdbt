@@ -8,8 +8,6 @@ The objective of this project is to showcase how raw data can be transformed int
 
 ---
 
----
-
 ## 🧾 Project Summary (End-to-End Walkthrough)
 
 ### What this project is
