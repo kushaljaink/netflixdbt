@@ -8,6 +8,163 @@ The objective of this project is to showcase how raw data can be transformed int
 
 ---
 
+---
+
+## 🧾 Project Summary (End-to-End Walkthrough)
+
+### What this project is
+This is a complete **Analytics Engineering** project built with **dbt + Snowflake**, using the **MovieLens 20M dataset** to simulate a Netflix-like analytics environment. The project demonstrates how to take raw CSV files (ratings, movies, tags, genome data), load them into a warehouse, and transform them into **clean, trusted, analytics-ready tables** that can be used by business stakeholders, dashboards, and downstream analytics.
+
+---
+
+### What the data is
+The MovieLens dataset represents real user behavior on a movie platform and includes:
+
+- **ratings.csv**: user ratings for movies (user_id, movie_id, rating, timestamp)
+- **movies.csv**: movie metadata (title, genres)
+- **tags.csv**: user-generated tags applied to movies (free-text metadata)
+- **links.csv**: mapping to external IDs (IMDb, TMDB)
+- **genome-tags.csv**: standardized tag dictionary (tag_id, tag)
+- **genome-scores.csv**: tag relevance scores per movie (movie_id, tag_id, relevance)
+
+Together, this data mimics what a streaming platform would need to analyze engagement, content performance, and recommendation signals.
+
+---
+
+### The problem this project solves
+Raw datasets are not immediately usable for analytics because they typically:
+- contain inconsistent formatting and naming
+- mix raw operational structure with analytics needs
+- are hard to query repeatedly without standardized models
+- lack documentation, lineage, and consistent definitions
+
+This project solves that by creating a **layered modeling system** that converts raw source data into well-defined tables that are easier to trust, query, and scale.
+
+---
+
+### Primary use cases (what questions this enables)
+This modeled dataset can support analytics such as:
+- Which movies are most highly rated, and how does this vary by genre?
+- How do users interact with content over time (rating trends)?
+- What tags best describe a movie (genome relevance), and how does that relate to engagement?
+- Which genres or tag clusters are associated with higher ratings?
+- What content catalog metadata can be reused consistently across dashboards?
+
+---
+
+### Who would use the final structured data
+The final tables are designed for:
+- **Data Analysts / BI Analysts** building dashboards and insights
+- **Product Analysts** measuring content engagement and user behavior
+- **Data Scientists / ML Engineers** using ratings + tags + genome scores for recommendation features
+- **Business stakeholders** consuming KPIs through BI tools (Power BI/Tableau)
+
+In a real Netflix-like environment, this is the type of structured layer that sits between raw data ingestion and reporting/ML.
+
+---
+
+### Data modeling approach (why we use layers)
+This project follows a common warehouse pattern:
+
+1) **RAW layer** (unchanged source-of-truth)  
+2) **STAGING layer** (clean, standardized, lightly transformed views)  
+3) **CORE/MART layer** (business-friendly dimensional models: facts + dimensions)
+
+This approach is used because it:
+- preserves raw data for audit/debugging
+- isolates cleaning logic into a single place (staging)
+- makes final tables consistent and reusable across teams
+- improves maintainability and reduces “one-off” SQL logic in dashboards
+
+---
+
+### What tables/views were built (high level)
+This dbt project produces:
+- **Staging models (`src_*`)**: clean versions of raw tables (standardized columns, types, null handling)
+- **Dimension models (`dim_*`)**: descriptive “lookup” tables used across analytics
+- **Fact models (`fct_*`)**: event/transaction-style tables used for metrics and trend analysis
+- **(Optional)** Mart models (`mart_*`) for curated, business-ready reporting outputs
+
+---
+
+### RAW → STAGING (what changed and why)
+**Raw data is not modified directly.** Instead, staging models create a clean interface for downstream modeling. Typical transformations include:
+- renaming columns to consistent snake_case naming
+- type casting (timestamps, numeric fields)
+- removing obvious invalid records (e.g., null ratings)
+- normalizing string fields (trim, standard casing)
+- ensuring each model has a clear grain (what 1 row represents)
+
+**Why:**  
+Staging creates a trusted “contract” so all downstream tables rely on consistent definitions.
+
+---
+
+### STAGING → DIMENSIONS/FACTS (what changed and why)
+After staging, the project creates analytics-friendly tables:
+
+#### Dimension tables (examples)
+- **dim_movies**: one row per movie with clean title + genre information  
+  *Why:* reusable movie metadata for any analysis
+- **dim_users**: one row per user derived from platform activity (ratings and tags)  
+  *Why:* consistent user identity table for joins and user-level analysis
+- **dim_genomes_tags**: cleaned tag dictionary (tag_id → standardized tag_name)  
+  *Why:* makes genome tag analysis readable and consistent
+
+#### Fact tables (examples)
+- **fct_ratings**: one row per rating event (user_id + movie_id + rating + timestamp)  
+  *Why:* supports engagement and time-series analysis
+- **fct_genome_scores**: one row per movie-tag relevance score  
+  *Why:* enables content similarity and tag-based feature engineering
+
+**Why facts and dims:**  
+This mirrors real BI modeling (star schema concepts) where:
+- facts hold measurable events
+- dimensions provide context and attributes
+
+---
+
+### Materialization choices (what was used and why)
+Different models can be materialized differently depending on performance and use case:
+
+- **Views (commonly used for staging)**  
+  *Why:* staging logic is light and can remain flexible; avoids extra storage
+- **Tables (commonly used for dimensions)**  
+  *Why:* dimensions are reused often; tables improve join performance and stability
+- **Incremental models (commonly used for large fact tables like ratings)**  
+  *Why:* only new data is processed on re-runs; scalable for growing datasets
+
+Materialization is chosen to balance:
+- performance
+- compute cost
+- maintainability
+- refresh speed
+
+---
+
+### Data quality + documentation (what ensures trust)
+This project supports professional dbt practices such as:
+- **dbt Docs** for autogenerated documentation and lineage
+- **schema.yml descriptions** and tests (where added)
+- repeatable transformation logic using `ref()` and `source()`
+
+**Why this matters:**  
+A big part of analytics engineering is making datasets reliable and explainable so other teams can confidently use them.
+
+---
+
+### Final outcome (what you get at the end)
+At the end of this project, the result is a Snowflake-based analytics layer that:
+- is structured for reporting and analysis (facts + dimensions)
+- is easy to maintain and extend using dbt
+- provides documentation and model lineage through dbt Docs
+- supports scalable refresh patterns (including incremental loads)
+
+This project demonstrates how modern analytics teams transform raw data into a reusable, trusted warehouse layer that powers dashboards, insights, and ML features.
+
+---
+
+
 ## 🧠 Business Context
 Netflix-style platforms generate massive volumes of data such as:
 - User ratings and engagement events
