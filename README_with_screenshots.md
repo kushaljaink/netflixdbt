@@ -115,7 +115,7 @@ netflixdbt/
 ### 🔹 Snowflake RAW Tables
 ![Snowflake Raw](screenshots/screenshots03_snowflake_raw_tables.png)
 
-### 🔹 Snowflake DEV Schema
+### 🔹 Snowflake View Schema
 ![Snowflake Dev](screenshots/screenshots04_snowflake_dev_schema.png)
 
 ### 🔹 dbt Docs – Lineage Graph
