@@ -11,7 +11,7 @@ The objective of this project is to showcase how raw data can be transformed int
 ## 🧾 Project Summary (End-to-End Walkthrough)
 
 ### What this project is
-This is a complete **Analytics Engineering** project built with **dbt + Snowflake**, using the **MovieLens 20M dataset** to simulate a Netflix-like analytics environment. The project demonstrates how to take raw CSV files (ratings, movies, tags, genome data), load them into a warehouse, and transform them into **clean, trusted, analytics-ready tables** that can be used by business stakeholders, dashboards, and downstream analytics.
+I designed and implemented this project end-to-end, including data ingestion, modeling, testing, documentation, and analytics validation. The project demonstrates how to take raw CSV files (ratings, movies, tags, genome data), load them into a warehouse, and transform them into **clean, trusted, analytics-ready tables** that can be used by business stakeholders, dashboards, and downstream analytics.
 
 ---
 
