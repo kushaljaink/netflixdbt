@@ -81,7 +81,6 @@ This dbt project produces:
 - **Staging models (`src_*`)**: clean versions of raw tables (standardized columns, types, null handling)
 - **Dimension models (`dim_*`)**: descriptive “lookup” tables used across analytics
 - **Fact models (`fct_*`)**: event/transaction-style tables used for metrics and trend analysis
-- **(Optional)** Mart models (`mart_*`) for curated, business-ready reporting outputs
 
 ---
 
