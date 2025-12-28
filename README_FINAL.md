@@ -423,7 +423,7 @@ Launches an interactive documentation website locally to explore models and line
 ### 🔹 Snowflake RAW Tables
 ![Snowflake Raw](screenshots/03_snowflake_raw_tables.png)
 
-### 🔹 Snowflake DEV Schema
+### 🔹 Snowflake View Schema
 ![Snowflake Dev](screenshots/04_snowflake_dev_schema.png)
 
 ### 🔹 dbt Docs – Lineage Graph
