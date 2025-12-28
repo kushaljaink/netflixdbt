@@ -2,26 +2,26 @@
 # 🎬 Netflix Analytics Engineering Project (dbt + Snowflake)
 
 ## 📌 Project Overview
-This project demonstrates an **end-to-end Analytics Engineering workflow** using **dbt** and **Snowflake**, built on top of the **MovieLens dataset** to simulate a real-world **Netflix-like analytics platform**.
+This project demonstrates an **end-to-end Analytics Engineering workflow** using **dbt** and **Snowflake**, built on top of the **MovieLens dataset** to simulate a real-world **Netflix-like platform**.
 
 The objective of this project is to showcase how raw data can be transformed into **analytics-ready fact and dimension tables** using modern data engineering best practices.
 
 ---
 
-## 🧾 Project Summary (End-to-End Walkthrough)
+## 🧾 Project Summary
 
-### What this project is
+### What this project is:
 I designed and implemented this project end-to-end, including data ingestion, modeling, testing, documentation, and analytics validation. The project demonstrates how to take raw CSV files (ratings, movies, tags, genome data), load them into a warehouse, and transform them into **clean, trusted, analytics-ready tables** that can be used by business stakeholders, dashboards, and downstream analytics.
 
 ---
 
 ### What the data is
-The MovieLens dataset represents real user behavior on a movie platform and includes:
+The MovieLens dataset represents real user behavior on a streaming platform and includes:
 
 - **ratings.csv**: user ratings for movies (user_id, movie_id, rating, timestamp)
 - **movies.csv**: movie metadata (title, genres)
 - **tags.csv**: user-generated tags applied to movies (free-text metadata)
-- **links.csv**: mapping to external IDs (IMDb, TMDB)
+- **links.csv**: mapping to external IDs (IMDb)
 - **genome-tags.csv**: standardized tag dictionary (tag_id, tag)
 - **genome-scores.csv**: tag relevance scores per movie (movie_id, tag_id, relevance)
 
@@ -40,13 +40,12 @@ This project solves that by creating a **layered modeling system** that converts
 
 ---
 
-### Primary use cases (what questions this enables)
+### Primary use cases
 This modeled dataset can support analytics such as:
 - Which movies are most highly rated, and how does this vary by genre?
 - How do users interact with content over time (rating trends)?
 - What tags best describe a movie (genome relevance), and how does that relate to engagement?
 - Which genres or tag clusters are associated with higher ratings?
-- What content catalog metadata can be reused consistently across dashboards?
 
 ---
 
@@ -61,7 +60,7 @@ In a real Netflix-like environment, this is the type of structured layer that si
 
 ---
 
-### Data modeling approach (why we use layers)
+### Data modeling approach
 This project follows a common warehouse pattern:
 
 1) **RAW layer** (unchanged source-of-truth)  
@@ -76,7 +75,7 @@ This approach is used because it:
 
 ---
 
-### What tables/views were built (high level)
+### What tables/views were built
 This dbt project produces:
 - **Staging models (`src_*`)**: clean versions of raw tables (standardized columns, types, null handling)
 - **Dimension models (`dim_*`)**: descriptive “lookup” tables used across analytics
@@ -84,20 +83,20 @@ This dbt project produces:
 
 ---
 
-### RAW → STAGING (what changed and why)
+### RAW → STAGING
 **Raw data is not modified directly.** Instead, staging models create a clean interface for downstream modeling. Typical transformations include:
-- renaming columns to consistent snake_case naming
+- renaming columns to consistent case naming
 - type casting (timestamps, numeric fields)
 - removing obvious invalid records (e.g., null ratings)
 - normalizing string fields (trim, standard casing)
-- ensuring each model has a clear grain (what 1 row represents)
+- ensuring each model has a clear grainularity
 
 **Why:**  
 Staging creates a trusted “contract” so all downstream tables rely on consistent definitions.
 
 ---
 
-### STAGING → DIMENSIONS/FACTS (what changed and why)
+### STAGING → DIMENSIONS/FACTS
 After staging, the project creates analytics-friendly tables:
 
 #### Dimension tables (examples)
@@ -115,13 +114,13 @@ After staging, the project creates analytics-friendly tables:
   *Why:* enables content similarity and tag-based feature engineering
 
 **Why facts and dims:**  
-This mirrors real BI modeling (star schema concepts) where:
+This is BI modeling where:
 - facts hold measurable events
 - dimensions provide context and attributes
 
 ---
 
-### Materialization choices (what was used and why)
+### Materialization choices
 Different models can be materialized differently depending on performance and use case:
 
 - **Views (commonly used for staging)**  
@@ -136,13 +135,14 @@ Materialization is chosen to balance:
 - compute cost
 - maintainability
 - refresh speed
+  
 “This materialization strategy mirrors how production analytics pipelines balance flexibility in early layers with performance and stability in downstream reporting layers.”
 ---
 
-### Data quality + documentation (what ensures trust)
+### Data quality + documentation
 This project supports professional dbt practices such as:
 - **dbt Docs** for autogenerated documentation and lineage
-- **schema.yml descriptions** and tests (where added)
+- **schema.yml descriptions** and tests
 - repeatable transformation logic using `ref()` and `source()`
 
 **Why this matters:**  
@@ -150,7 +150,7 @@ A big part of analytics engineering is making datasets reliable and explainable 
 
 ---
 
-### Final outcome (what you get at the end)
+### Final outcome
 At the end of this project, the result is a Snowflake-based analytics layer that:
 - is structured for reporting and analysis (facts + dimensions)
 - is easy to maintain and extend using dbt
@@ -168,7 +168,7 @@ MovieLens CSV Files
 → Snowflake RAW Schema  
 → dbt Staging Models  
 → dbt Dimension & Fact Models  
-→ Analytics Consumption + dbt Docs
+→ Analytics + dbt Docs
 
 ---
 
@@ -190,7 +190,6 @@ flowchart LR
     F --> H
 ```
 
-### Architecture Notes
 - Raw CSV data is stored in **Amazon S3**
 - Data is loaded into **Snowflake RAW schema**
 - **dbt staging models** clean and standardize raw data
@@ -200,7 +199,8 @@ flowchart LR
 ---
 
 ## 📂 Dataset Used
-**MovieLens 20M Dataset**
+**MovieLens Dataset**
+https://grouplens.org/datasets/movielens/20m/
 
 Files:
 - `ratings.csv` – User ratings with timestamps  
@@ -443,18 +443,6 @@ This launches an interactive documentation site showing:
 - Dependencies
 - Source freshness
 
----
-
-## 🚀 How to Run the Project
-
-1. Upload MovieLens CSV files to Amazon S3  
-2. Load raw data into Snowflake  
-3. Initialize the dbt project  
-4. Configure Snowflake profile  
-5. Run transformations:
-```bash
-dbt run
-```
 ---
 
 ## ✅ Analytics Queries (Executed in Snowflake)
